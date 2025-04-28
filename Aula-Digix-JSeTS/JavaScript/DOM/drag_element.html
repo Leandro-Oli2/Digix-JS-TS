@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #dragElement {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(134, 120, 120);
+            position: absolute;
+            cursor: pointer;
+            text-align: center;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dragElement = document.getElementById("dragElement");
+            dragElement.addEventListener('mousedown', (event)=>{
+                let shiftX = event.clientX - dragElement.getBoundingClientRect().left;
+                let shiftY = event.clientY - dragElement.getBoundingClientRect().top;
+
+                dragElement.style.position = 'absolute';
+                dragElement.style.zIndex = 1000;
+                document.body.append(dragElement);
+                moveAt( event.pageX, event.pageY);
+                function moveAt(pageX, pageY) {
+                    dragElement.style.left = pageX - shiftX + 'px';
+                    dragElement.style.top = pageY - shiftY + 'px';
+                }
+
+                function onMouseMove(event) {
+                    moveAt(event.pageX, event.pageY);
+                }
+                document.addEventListener('mousemove', onMouseMove);
+
+                dragElement.onmouseup = function() {
+                    document.removeEventListener('mousemove',onMouseMove);
+                    dragElement.onmouseup = null;
+
+                }
+            });
+            // dragElement.ondragstart = () => {
+            //     return false;
+            // };
+            
+        });
+    </script>
+</head>
+<body>
+
+    <div id="dragElement">Arraste!</div>
+
+</body>
+</html>
