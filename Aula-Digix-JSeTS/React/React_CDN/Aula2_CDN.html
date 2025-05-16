@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 2 - React (CDN)</title>
+    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container{max-width: 800px;margin: 0 auto;}
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .tarefa {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        .tarefa.concluida span {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        
+        function WindowSize(){
+            const [size, setSize] = useState(
+                {
+                    width: window.innerWidth,
+                    height: window.innerHeight
+                }
+            );
+            useEffect(() => {
+                const handleResize = () => {
+                    setSize({
+                        width: window.innerWidth,
+                        height: window.innerHeight
+                    });
+                };
+                window.addEventListener('resize', handleResize);
+                return () => window.removeEventListener('resize', handleResize)
+            }, []);
+            return <div>Tamanho da Janela: {size.width} x {size.height}</div>; 
+        };
+         function App(){
+            return (
+                <div className="container">
+                    <h1>Aula 2</h1>
+                    <section>
+                        <WindowSize />    
+                    </section>
+                </div>
+            )
+        }
+
+    
+        ReactDOM.render(<App/>, document.getElementById('root'));
+    </script>
+</body>
+</html>
