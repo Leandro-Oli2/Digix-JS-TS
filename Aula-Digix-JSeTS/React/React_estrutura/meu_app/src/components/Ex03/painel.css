@@ -1,0 +1,21 @@
+.painel {
+  border: 2px solid #4a90e2;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.painel h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.conteudo {
+  margin-top: 8px;
+}
